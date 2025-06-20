@@ -26,6 +26,8 @@
     clippy::unnecessary_cast,
     clippy::useless_conversion
 )]
+// TODO: Remove this when libc symbols are stabilized.
+#![cfg_attr(target_os = "nanvix", feature(rustc_private))]
 
 #[macro_use]
 extern crate cfg_if;

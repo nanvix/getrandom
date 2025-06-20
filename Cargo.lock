@@ -62,9 +62,8 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.171"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c19937216e9d3aa9956d9bb8dfc0b0c8beb6058fc4f7a4dc4d850edf86a237d6"
+version = "0.2.173"
+source = "git+https://github.com/nanvix/libc?branch=nanvix/v0.2.173-dev#bded555abb711e544a859f2a5e327d591ed0466f"
 
 [[package]]
 name = "log"

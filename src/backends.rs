@@ -57,6 +57,7 @@ cfg_if! {
         target_os = "openbsd",
         target_os = "vita",
         target_os = "emscripten",
+        target_os = "nanvix",
     ))] {
         mod getentropy;
         pub use getentropy::*;

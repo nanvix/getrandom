@@ -34,11 +34,11 @@ core = { version = "1.0", optional = true, package = "rustc-std-workspace-core" 
 
 # getrandom / linux_android_with_fallback
 [target.'cfg(all(any(target_os = "linux", target_os = "android"), not(any(all(target_os = "linux", target_env = ""), getrandom_backend = "custom", getrandom_backend = "linux_raw", getrandom_backend = "rdrand", getrandom_backend = "rndr"))))'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # apple-other
 [target.'cfg(any(target_os = "ios", target_os = "visionos", target_os = "watchos", target_os = "tvos"))'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # efi_rng
 [target.'cfg(all(target_os = "uefi", getrandom_backend = "efi_rng"))'.dependencies]
@@ -46,27 +46,31 @@ r-efi = { version = "5.1", default-features = false }
 
 # getentropy
 [target.'cfg(any(target_os = "macos", target_os = "openbsd", target_os = "vita", target_os = "emscripten"))'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # getrandom
 [target.'cfg(any(target_os = "dragonfly", target_os = "freebsd", target_os = "hurd", target_os = "illumos", target_os = "cygwin", all(target_os = "horizon", target_arch = "arm")))'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
+
+# nanvix
+[target.'cfg(target_os = "nanvix")'.dependencies]
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # netbsd
 [target.'cfg(target_os = "netbsd")'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # solaris
 [target.'cfg(target_os = "solaris")'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # use_file
 [target.'cfg(any(target_os = "haiku", target_os = "redox", target_os = "nto", target_os = "aix"))'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # vxworks
 [target.'cfg(target_os = "vxworks")'.dependencies]
-libc = { version = "0.2.154", default-features = false }
+libc = { git = "https://github.com/nanvix/libc", branch = "nanvix/v0.2.173-dev", default-features = false }
 
 # wasi (0.2 only)
 [target.'cfg(all(target_arch = "wasm32", target_os = "wasi", target_env = "p2"))'.dependencies]
