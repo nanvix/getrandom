@@ -206,6 +206,8 @@
 #![no_std]
 #![warn(rust_2018_idioms, unused_lifetimes, missing_docs)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
+// TODO: Remove this when libc symbols are stabilized.
+#![cfg_attr(target_os = "nanvix", feature(rustc_private))]
 
 #[macro_use]
 extern crate cfg_if;
@@ -240,6 +242,7 @@ cfg_if! {
         target_os = "openbsd",
         target_os = "vita",
         target_os = "emscripten",
+        target_os = "nanvix",
     ))] {
         mod util_libc;
         #[path = "getentropy.rs"] mod imp;

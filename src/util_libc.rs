@@ -1,17 +1,18 @@
 #![allow(dead_code)]
 use crate::Error;
+use core::{mem::MaybeUninit, num::NonZeroU32};
+#[cfg(not(target_os = "nanvix"))]
 use core::{
-    mem::MaybeUninit,
-    num::NonZeroU32,
     ptr::NonNull,
     sync::atomic::{fence, AtomicPtr, Ordering},
 };
+#[cfg(not(target_os = "nanvix"))]
 use libc::c_void;
 
 cfg_if! {
     if #[cfg(any(target_os = "netbsd", target_os = "openbsd", target_os = "android"))] {
         use libc::__errno as errno_location;
-    } else if #[cfg(any(target_os = "linux", target_os = "emscripten", target_os = "hurd", target_os = "redox", target_os = "dragonfly"))] {
+    } else if #[cfg(any(target_os = "linux", target_os = "emscripten", target_os = "hurd", target_os = "redox", target_os = "dragonfly", target_os = "nanvix"))] {
         use libc::__errno_location as errno_location;
     } else if #[cfg(any(target_os = "solaris", target_os = "illumos"))] {
         use libc::___errno as errno_location;
@@ -81,11 +82,13 @@ pub fn sys_fill_exact(
 // Based off of the DlsymWeak struct in libstd:
 // https://github.com/rust-lang/rust/blob/1.61.0/library/std/src/sys/unix/weak.rs#L84
 // except that the caller must manually cast self.ptr() to a function pointer.
+#[cfg(not(target_os = "nanvix"))]
 pub struct Weak {
     name: &'static str,
     addr: AtomicPtr<c_void>,
 }
 
+#[cfg(not(target_os = "nanvix"))]
 impl Weak {
     // A non-null pointer value which indicates we are uninitialized. This
     // constant should ideally not be a valid address of a function pointer.
